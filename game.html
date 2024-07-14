@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Міні гра з візуальною новелою</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 50px;
+        }
+        .card {
+            background-color: #5f5f5f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .image-section {
+            margin-bottom: 20px;
+        }
+        .image-section img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .message-section {
+            font-size: 35px;
+            color: #151515;
+        }
+        .choices {
+            margin-top: 20px;
+        }
+        .choice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-size: 25px;
+            color: #e4e4e4;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .choice img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .choice:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="image-section">
+            <img id="story-image" src="mesmile.png" alt="Початок гри">
+        </div>
+        <div class="message-section" id="story-text">
+            <p>Привіт! Куди хочеш сходити?</p>
+        </div>
+        <div class="choices">
+            <a class="choice" id="choice1" onclick="makeChoice(1)">
+                <span>Вийти з дому</span>
+            </a>
+            <a class="choice" id="choice2" onclick="makeChoice(2)">
+                <span>Залишитись вдома</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function makeChoice(choice) {
+            var storyImage = document.getElementById('story-image');
+            var storyText = document.getElementById('story-text');
+            var choice1 = document.getElementById('choice1');
+            var choice2 = document.getElementById('choice2');
+            var choice3, choice4;
+
+            if (choice === 1) {
+                storyImage.src = 'me.png';
+                storyText.innerHTML = '<p>Реально? На вулицю? Що далі?</p>';
+                choice1.innerHTML = '<span>Піти до парку</span>';
+                choice2.innerHTML = '<span>Піти до кафе</span>';
+                choice1.onclick = function() { makeChoice(3); };
+                choice2.onclick = function() { makeChoice(4); };
+                choice3 = document.createElement('a');
+                choice3.className = 'choice';
+                choice3.innerHTML = '<span>Піти в кіно</span>';
+                choice3.onclick = function() { makeChoice(7); };
+                choice1.parentNode.insertBefore(choice3, choice2.nextSibling);
+                choice4 = document.createElement('a');
+                choice4.className = 'choice';
+                choice4.innerHTML = '<span>Піти в центр</span>';
+                choice4.onclick = function() { makeChoice(8); };
+                choice1.parentNode.insertBefore(choice4, choice3.nextSibling);
+            } else if (choice === 2) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти залишився вдома. Чим зайнятись?</p>';
+                choice1.innerHTML = '<span>Поїсти</span>';
+                choice2.innerHTML = '<span>Пограти в уно</span>';
+                choice1.onclick = function() { makeChoice(5); };
+                choice2.onclick = function() { makeChoice(6); };
+                choice3 = document.createElement('a');
+                choice3.className = 'choice';
+                choice3.innerHTML = '<span>Випити</span>';
+                choice3.onclick = function() { makeChoice(9); };
+                choice1.parentNode.insertBefore(choice3, choice2.nextSibling);
+                choice4 = document.createElement('a');
+                choice4.className = 'choice';
+                choice4.innerHTML = '<span>Подивитися фільм</span>';
+                choice4.onclick = function() { makeChoice(10); };
+                choice1.parentNode.insertBefore(choice4, choice3.nextSibling);
+            } else if (choice === 3) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти пішов до парку і побачив красивий захід сонця. Що далі?</p>';
+                choice1.innerHTML = '<span>Зустріти ексцентричного художника, який малює портрети за допомогою свого кота</span>';
+                choice2.innerHTML = '<span>Перехопити репетицію групи танцюристів, які репетирують запальний танець</span>';
+                choice1.onclick = function() { makeChoice(15); };
+                choice2.onclick = function() { makeChoice(16); };
+            } else if (choice === 4) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти пішов до кафе і скуштував найсмачнішу каву. Що далі?</p>';
+                choice1.innerHTML = '<span>Замовити десерт</span>';
+                choice2.innerHTML = '<span>Піти додому</span>';
+                choice1.onclick = function() { makeChoice(13); };
+                choice2.onclick = function() { makeChoice(12); };
+            } else if (choice === 5) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти поїв і відчув себе краще. Що далі?</p>';
+                choice1.innerHTML = '<span>Почитати книгу</span>';
+                choice2.innerHTML = '<span>Подивитися фільм</span>';
+                choice1.onclick = function() { makeChoice(14); };
+                choice2.onclick = function() { makeChoice(10); };
+            } else if (choice === 6) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти пограв в уно і виграв партію. Що далі?</p>';
+                choice1.innerHTML = '<span>Поїсти</span>';
+                choice2.innerHTML = '<span>Подивитися фільм</span>';
+                choice1.onclick = function() { makeChoice(5); };
+                choice2.onclick = function() { makeChoice(10); };
+            } else if (choice === 7) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти пішов в кіно і подивився цікавий фільм. Що далі?</p>';
+                choice1.innerHTML = '<span>Піти в кафе</span>';
+                choice2.innerHTML = '<span>Піти додому</span>';
+                choice1.onclick = function() { makeChoice(4); };
+                choice2.onclick = function() { makeChoice(12); };
+            } else if (choice === 8) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти пішов в центр і насолодився вечором. Що далі?</p>';
+                choice1.innerHTML = '<span>Піти в кафе</span>';
+                choice2.innerHTML = '<span>Піти додому</span>';
+                choice1.onclick = function() { makeChoice(4); };
+                choice2.onclick = function() { makeChoice(12); };
+            } else if (choice === 9) {
+                storyImage.src = 'me1.png';
+                storyText.innerHTML = '<p>Ти випив і розслабився. Що далі?</p>';
+                choice1.innerHTML = '<span>Поїсти</span>';
+                choice2.innerHTML = '<span>Подивитися фільм</span>';
+                choice1.onclick = function() { makeChoice(5); };
+                choice2.onclick = function() { makeChoice(10); };
+            } else if (choice === 10) {
+                storyImage.src = 'me2.png';
+                storyText.innerHTML = '<p>Ти подивився цікавий фільм. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 11) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти продовжив прогулянку і насолодився красивим заходом сонця. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 12) {
+                storyImage.src = 'mesmile.png';
+                storyText.innerHTML = '<p>Ти повернувся додому і відпочив. Що далі?</p>';
+                choice1.innerHTML = '<span>Несподіваний візит друзів</span>';
+                choice2.innerHTML = '<span>Кумедний випадок з домашнім улюбленцем</span>';
+                choice1.onclick = function() { makeChoice(17); };
+                choice2.onclick = function() { makeChoice(18); };
+            } else if (choice === 13) {
+                storyImage.src = 'dessert.png';
+                storyText.innerHTML = '<p>Ти замовив десерт і насолодився ним. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 14) {
+                storyImage.src = 'book.png';
+                storyText.innerHTML = '<p>Ти почитав книгу і дізнався багато нового. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 15) {
+                storyImage.src = 'artist.png';
+                storyText.innerHTML = '<p>Ти зустрів ексцентричного художника, який малює портрети людей за допомогою свого кота. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 16) {
+                storyImage.src = 'dancers.png';
+                storyText.innerHTML = '<p>Ти перехопив репетицію групи танцюристів, які репетирують запальний танець. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 17) {
+                storyImage.src = 'friends.png';
+                storyText.innerHTML = '<p>Несподіваний візит друзів. Кінець історії.</p>';
+                hideChoices();
+            } else if (choice === 18) {
+                storyImage.src = 'pet.png';
+                storyText.innerHTML = '<p>Кумедний випадок з домашнім улюбленцем. Кінець історії.</p>';
+                hideChoices();
+            }
+        }
+
+        function hideChoices() {
+            var choices = document.getElementsByClassName('choice');
+            for (var i = 0; i < choices.length; i++) {
+                choices[i].style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
